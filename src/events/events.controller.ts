@@ -12,6 +12,16 @@ export class eventsController {
 
     @Post("user/signout")
     async userSignout(@Body("username") username: string) {
-        this.eventsGateway.emitter("signout", username);
+        await this.eventsGateway.emitter("signout", username);
+    }
+
+    @Post("channel/motion")
+    async motionDetected(@Body("name") name: string) {
+        await this.eventsGateway.emitter("motion_detection", name);
+    }
+
+    @Post("recording/delete")
+    async recordingDelete(@Body("recordingUrl") recordingUrl: string) {
+        await this.eventsGateway.emitter("recording_delete", recordingUrl);
     }
 }

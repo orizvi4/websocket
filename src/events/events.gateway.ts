@@ -17,7 +17,7 @@ import { SubscribeMessage, WebSocketGateway, WebSocketServer, MessageBody } from
     //   await this.emitter(roomName, "ffvww");
     // }
   
-    async emitter(title: string, data: any) {
+    public async emitter(title: string, data: any) {
       console.log("sending to: " + title + " data: " + data);
       this.server.emit(title, data);
     }
