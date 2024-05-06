@@ -1,27 +1,34 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { EventsGateway } from "./events.gateway";
+import { RoomInfoDTO } from "src/models/roomInfoDTO.interface";
 
 @Controller()
 export class eventsController {
-    constructor(private eventsGateway: EventsGateway) {}
+    constructor(private eventsGateway: EventsGateway) { }
 
     @Post("channel/live")
-    async channelIsLive(@Body("_id") id: string, @Body("isLive") isLive: boolean) {
-        this.eventsGateway.emitter("channel_live",{_id: id, isLive: isLive});
+    public async channelIsLive(@Body("_id") id: string, @Body("isLive") isLive: boolean) {
+        this.eventsGateway.emitter("channel_live", { _id: id, isLive: isLive });
     }
 
     @Post("user/signout")
-    async userSignout(@Body("username") username: string) {
+    public async userSignout(@Body("username") username: string) {
         await this.eventsGateway.emitter("signout", username);
     }
 
     @Post("channel/motion")
-    async motionDetected(@Body("name") name: string) {
+    public async motionDetected(@Body("name") name: string) {
         await this.eventsGateway.emitter("motion_detection", name);
     }
 
+    @Post("room/info")
+    public async roomInfo(@Body() info: RoomInfoDTO) {
+        await this.eventsGateway.emitter("room_info", info);
+        console.log(info);
+    }
+
     @Post("recording/delete")
-    async recordingDelete(@Body("recordingUrl") recordingUrl: string) {
+    public async recordingDelete(@Body("recordingUrl") recordingUrl: string) {
         await this.eventsGateway.emitter("recording_delete", recordingUrl);
     }
 }

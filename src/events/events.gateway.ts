@@ -18,7 +18,7 @@ import { SubscribeMessage, WebSocketGateway, WebSocketServer, MessageBody } from
     // }
   
     public async emitter(title: string, data: any) {
-      console.log("sending to: " + title + " data: " + data);
+      // console.log("sending to: " + title + " data: " + JSON.stringify(data));
       this.server.emit(title, data);
     }
   }
