@@ -13,6 +13,7 @@ export class eventsController {
 
     @Post("user/signout")
     public async userSignout(@Body("username") username: string) {
+        console.log("got sign out " + username);
         await this.eventsGateway.emitter("signout", username);
     }
 

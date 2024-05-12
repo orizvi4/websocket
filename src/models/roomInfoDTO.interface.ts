@@ -4,4 +4,5 @@ export interface RoomInfoDTO {
     userCount: number;
     users: UserDTO[];
     roomId: string;
+    channelsCount: number;
 }
